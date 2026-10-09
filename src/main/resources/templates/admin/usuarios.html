@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Usuarios')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="pagina pagina-larga">
+    <section class="painel">
+        <div class="cabecalho-painel">
+            <div>
+                <p sec:authentication="name"></p>
+                <h1>Gerenciamento de usuarios</h1>
+                <p>Controle os perfis e o status das contas cadastradas.</p>
+            </div>
+            <a class="botao" th:href="@{/admin}">Voltar</a>
+        </div>
+
+        <p class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></p>
+        <p class="erro" th:if="${erro}" th:text="${erro}"></p>
+
+        <div class="tabela-responsiva">
+            <table class="tabela-usuarios">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Status</th>
+                    <th>Perfis</th>
+                    <th>Acoes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(usuarios)}">
+                    <td colspan="5">Nenhum usuario cadastrado.</td>
+                </tr>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.nome}">Nome</td>
+                    <td th:text="${usuario.email}">email@exemplo.com</td>
+                    <td>
+                        <span class="status status-ativo" th:if="${usuario.ativo}">Ativo</span>
+                        <span class="status status-inativo" th:unless="${usuario.ativo}">Inativo</span>
+                    </td>
+                    <td>
+                        <form class="form-perfis" th:action="@{/admin/usuarios/{id}/roles(id=${usuario.id})}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <label th:each="role : ${rolesDisponiveis}">
+                                <input type="checkbox" name="roles" th:value="${role.name()}" th:checked="${usuario.roles.contains(role)}">
+                                <span th:text="${role.descricao}">Perfil</span>
+                            </label>
+                            <button class="botao botao-pequeno" type="submit">Salvar perfis</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/usuarios/{id}/status(id=${usuario.id})}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <button class="botao botao-pequeno" type="submit" th:text="${usuario.ativo ? 'Desativar' : 'Ativar'}">
+                                Alterar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

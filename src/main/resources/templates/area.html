@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head(${titulo})}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="pagina">
+    <section class="painel">
+        <p sec:authentication="name"></p>
+        <h1 th:text="${titulo}">Area do usuario</h1>
+        <p th:text="${descricao}">Descricao da area protegida.</p>
+        <div class="acoes">
+            <a class="botao" sec:authorize="hasRole('ALUNO')" th:href="@{/aluno}">Aluno</a>
+            <a class="botao" sec:authorize="hasAnyRole('PROFESSOR','ADMIN')" th:href="@{/professor}">Professor</a>
+            <a class="botao" sec:authorize="hasRole('ADMIN')" th:href="@{/admin}">Administrador</a>
+            <a class="botao botao-primario" sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuarios}">Gerenciar usuarios</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

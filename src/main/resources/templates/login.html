@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Login')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="auth-shell auth-shell-login">
+    <aside class="auth-showcase" aria-label="Apresentação ConectaSaude">
+        <div class="auth-showcase-top">
+            <span class="auth-monograma">CS</span>
+            <span class="auth-wordmark">CONECTA<span>SAUDE</span></span>
+        </div>
+        <div class="auth-showcase-copy">
+            <p class="auth-kicker">Aprendizagem com propósito</p>
+            <h1>Seu próximo passo começa aqui.</h1>
+            <p>Um espaço para aprender, evoluir e cuidar do que realmente importa.</p>
+        </div>
+        <div class="auth-showcase-bottom">
+            <span class="auth-status-dot"></span>
+            <span>Conhecimento que aproxima pessoas</span>
+            <span class="auth-showcase-index">01 / 03</span>
+        </div>
+    </aside>
+
+    <section class="auth-content" aria-labelledby="login-titulo">
+        <div class="auth-form-wrap">
+            <p class="auth-kicker auth-kicker-muted">Área segura · Acesso à plataforma</p>
+            <h2 id="login-titulo">Que bom ter você de volta.</h2>
+            <p class="auth-intro">Entre com seus dados para continuar de onde parou.</p>
+
+            <p class="sucesso auth-feedback" th:if="${sucesso}" th:text="${sucesso}"></p>
+            <p class="erro auth-feedback" th:if="${param.erro}">E-mail ou senha inválidos. Confira seus dados e tente novamente.</p>
+            <p class="sucesso auth-feedback" th:if="${param.saiu}">Você saiu da sua conta.</p>
+
+            <form class="auth-form" th:action="@{/login}" method="post">
+                <div class="campo auth-field">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" autocomplete="email" maxlength="150" placeholder="voce@exemplo.com" required autofocus>
+                </div>
+
+                <div class="campo auth-field">
+                    <label for="senha">Senha</label>
+                    <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+                </div>
+
+                <button class="auth-submit botao-primario" type="submit">Entrar na plataforma <span aria-hidden="true">→</span></button>
+            </form>
+
+            <p class="auth-switch">Ainda não tem uma conta? <a th:href="@{/cadastro}">Criar cadastro <span aria-hidden="true">↗</span></a></p>
+            <p class="auth-privacy">Seus dados são protegidos e usados apenas para acesso à plataforma.</p>
+        </div>
+        <span class="auth-content-index" aria-hidden="true">CONECTASAUDE / LOGIN</span>
+    </section>
+</main>
+</body>
+</html>

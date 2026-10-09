@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Cadastro')}"></head>
+<body>
+<header th:replace="~{fragments :: topo}"></header>
+<main class="auth-shell auth-shell-cadastro">
+    <aside class="auth-showcase auth-showcase-cadastro" aria-label="Informações sobre o cadastro">
+        <div class="auth-showcase-top">
+            <span class="auth-monograma">CS</span>
+            <span class="auth-wordmark">CONECTA<span>SAUDE</span></span>
+        </div>
+        <div class="auth-showcase-copy">
+            <p class="auth-kicker">Uma nova jornada</p>
+            <h1>Faça parte de uma comunidade que cresce junto.</h1>
+            <p>Crie seu acesso para descobrir conteúdos, possibilidades e novas conexões.</p>
+        </div>
+        <ol class="auth-steps">
+            <li><span>01</span><div><strong>Crie seu perfil</strong><small>Leva menos de um minuto</small></div></li>
+            <li><span>02</span><div><strong>Entre na plataforma</strong><small>Seu espaço estará pronto</small></div></li>
+            <li><span>03</span><div><strong>Comece a aprender</strong><small>No seu ritmo, do seu jeito</small></div></li>
+        </ol>
+        <div class="auth-showcase-bottom">
+            <span class="auth-status-dot"></span>
+            <span>Seu próximo capítulo começa agora</span>
+            <span class="auth-showcase-index">02 / 03</span>
+        </div>
+    </aside>
+
+    <section class="auth-content auth-content-cadastro" aria-labelledby="cadastro-titulo">
+        <div class="auth-form-wrap auth-form-wrap-wide">
+            <p class="auth-kicker auth-kicker-muted">Cadastro de acesso</p>
+            <h2 id="cadastro-titulo">Vamos começar?</h2>
+            <p class="auth-intro">Preencha seus dados para criar sua conta ConectaSaude.</p>
+
+            <form class="auth-form cadastro-form" th:action="@{/cadastro}" th:object="${cadastroUsuarioForm}" method="post">
+                <div class="cadastro-grid">
+                    <div class="campo auth-field">
+                        <label for="nome">Nome completo</label>
+                        <input id="nome" type="text" th:field="*{nome}" autocomplete="name" maxlength="80" placeholder="Como podemos chamar você?" required>
+                        <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                    </div>
+
+                    <div class="campo auth-field">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" th:field="*{email}" autocomplete="email" maxlength="150" placeholder="voce@exemplo.com" required>
+                        <span class="erro" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    </div>
+
+                    <fieldset class="cadastro-perfil">
+                        <legend>Como você participa?</legend>
+                        <div class="opcoes perfil-opcoes">
+                            <label class="perfil-opcao"><input type="radio" th:field="*{perfil}" value="ALUNO"><span>Aluno</span></label>
+                            <label class="perfil-opcao"><input type="radio" th:field="*{perfil}" value="PROFESSOR"><span>Professor</span></label>
+                        </div>
+                        <span class="erro" th:if="${#fields.hasErrors('perfil')}" th:errors="*{perfil}"></span>
+                    </fieldset>
+
+                    <div class="campo auth-field">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" th:field="*{senha}" autocomplete="new-password" minlength="8" placeholder="Mínimo de 8 caracteres" required>
+                        <span class="erro" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></span>
+                    </div>
+
+                    <div class="campo auth-field">
+                        <label for="confirmarSenha">Confirmar senha</label>
+                        <input id="confirmarSenha" type="password" th:field="*{confirmarSenha}" autocomplete="new-password" minlength="8" placeholder="Digite a senha novamente" required>
+                        <span class="erro" th:if="${#fields.hasErrors('senhasIguais')}" th:errors="*{senhasIguais}"></span>
+                    </div>
+                </div>
+
+                <label class="check cadastro-termos">
+                    <input type="checkbox" th:field="*{aceitouTermos}">
+                    <span>Aceito os termos de uso do sistema.</span>
+                </label>
+                <p class="erro" th:if="${#fields.hasErrors('aceitouTermos')}" th:errors="*{aceitouTermos}"></p>
+
+                <button class="auth-submit botao-primario" type="submit">Criar minha conta <span aria-hidden="true">→</span></button>
+            </form>
+
+            <p class="auth-switch">Já tem uma conta? <a th:href="@{/login}">Entrar <span aria-hidden="true">↗</span></a></p>
+        </div>
+        <span class="auth-content-index" aria-hidden="true">CONECTASAUDE / CADASTRO</span>
+    </section>
+</main>
+</body>
+</html>

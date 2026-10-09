@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Início')}"></head>
+<body class="home-page">
+<header th:replace="~{fragments :: topo}"></header>
+<main class="home-dashboard">
+    <div class="home-heading-row">
+        <div>
+            <p class="home-breadcrumb"><span></span> ESPAÇO DO ESTUDANTE</p>
+            <h1>Olá, <span th:text="${nomeAluno}">aluno</span>.</h1>
+            <p class="home-heading-copy">Um bom dia para aprender algo novo e seguir em frente.</p>
+        </div>
+        <a class="home-profile-link" th:href="@{/aluno}"><span class="home-profile-mark" aria-hidden="true">↗</span> Minha área</a>
+    </div>
+
+    <div class="home-dashboard-grid">
+        <section class="home-main-panel" aria-labelledby="home-destaque-titulo">
+            <div class="home-panel-meta"><span>SEU PONTO DE PARTIDA</span><span class="home-meta-line"></span><span>01</span></div>
+            <div class="home-main-panel-content">
+                <p class="home-feature-label">CONECTASAÚDE / ALUNO</p>
+                <h2 id="home-destaque-titulo">Conhecimento que acompanha você.</h2>
+                <p>Acesse seu espaço pessoal e explore os recursos disponíveis para a sua jornada.</p>
+                <a class="home-cta" th:href="@{/aluno}">Abrir minha área <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="home-coordinate" aria-hidden="true">CS — 01</div>
+        </section>
+
+        <aside class="home-side-panel" aria-labelledby="home-atalhos-titulo">
+            <div class="home-side-heading">
+                <span class="home-side-index">A / 03</span>
+                <h2 id="home-atalhos-titulo">Acesso rápido</h2>
+            </div>
+            <a class="home-side-link" th:href="@{/aluno}">
+                <span class="home-link-number">01</span><span class="home-link-copy"><strong>Área do aluno</strong><small>Seu espaço pessoal</small></span><span class="home-link-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="home-side-link" href="#recursos">
+                <span class="home-link-number">02</span><span class="home-link-copy"><strong>Recursos</strong><small>Conheça a plataforma</small></span><span class="home-link-arrow" aria-hidden="true">↓</span>
+            </a>
+            <div class="home-side-note"><span class="home-status-indicator"></span><span>Seu ambiente está pronto para você.</span></div>
+        </aside>
+    </div>
+
+    <section class="home-resources" id="recursos" aria-labelledby="home-recursos-titulo">
+        <div class="home-section-heading">
+            <div><p class="home-section-kicker">EXPLORE</p><h2 id="home-recursos-titulo">Sua jornada, em foco.</h2></div>
+            <span class="home-section-count">03 RECURSOS</span>
+        </div>
+        <div class="home-resource-grid">
+            <article class="home-resource home-resource-featured">
+                <span class="home-resource-icon" aria-hidden="true">↗</span>
+                <span class="home-resource-number">01 / ESPAÇO</span>
+                <h3>Área do aluno</h3>
+                <p>Acesse seu espaço pessoal e acompanhe as novidades da plataforma.</p>
+                <a th:href="@{/aluno}" aria-label="Acessar área do aluno">Acessar <span aria-hidden="true">→</span></a>
+            </article>
+            <article class="home-resource">
+                <span class="home-resource-icon" aria-hidden="true">✳</span>
+                <span class="home-resource-number">02 / APRENDIZADO</span>
+                <h3>No seu ritmo</h3>
+                <p>Continue sua jornada de aprendizagem no seu tempo.</p>
+            </article>
+            <article class="home-resource">
+                <span class="home-resource-icon" aria-hidden="true">+</span>
+                <span class="home-resource-number">03 / BEM-ESTAR</span>
+                <h3>Cuidado integral</h3>
+                <p>Um ambiente pensado para apoiar seu desenvolvimento.</p>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>
