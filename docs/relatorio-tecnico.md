@@ -1,10 +1,10 @@
 ﻿# SISTEMA WEB DE CONTROLE DE ACESSO COM SPRING BOOT E MONGODB
 
 **Relatório técnico acadêmico**  
-**Autor(a):** [Nome do(a) estudante]  
-**Instituição:** [Nome da instituição]  
-**Curso:** [Nome do curso]  
-**Cidade:** [Cidade]  
+**Autor(a):** Nicholas Moura
+**Instituição:** UMC  
+**Curso:** Sistemas de informação
+**Cidade:** Mogi das cruzes 
 **Ano:** 2026
 
 ## Resumo
